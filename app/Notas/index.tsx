@@ -36,14 +36,14 @@ const NotasUdeb = () => {
 
         setError('');
         setNotasGuardadas([...notasGuardadas, valorNota]);
-        setNota('');//limpiesa
+        setNota(''); // limpieza
     };
 
     const calcularPromedio = () => {
-        if (notasGuardadas.length === 0) return "0.00";//si no hay notas es 0
+        if (notasGuardadas.length === 0) return "0.00"; // si no hay notas es 0
         const suma = notasGuardadas.reduce((total, actual) => total + actual, 0);
         const promedio = suma / notasGuardadas.length;
-        return promedio.toFixed(2);//ver si hay 2 decimales
+        return promedio.toFixed(2); // ver si hay 2 decimales
     };
 
     const borrarNotas = () => {
@@ -53,9 +53,9 @@ const NotasUdeb = () => {
     };
 
     const irLogin = () => {
-            borrarNotas();
-            router.back();
-        }
+        borrarNotas();
+        router.back(); 
+    }
 
     return (
         <View style={styles.container}>
@@ -79,25 +79,30 @@ const NotasUdeb = () => {
             <Text style={styles.titulo}>Promedio: {calcularPromedio()}</Text>
 
             <ScrollView style={styles.listaContenedor}>
-                {/*scrollview muestra las notas*/}
+                {/* scrollview muestra las notas */}
                 {notasGuardadas.map((notaGuardada, index) => (
                     <Text key={index} style={styles.notaItem}>
                         nota{index + 1}: {notaGuardada.toFixed(2)}
-                    </Text>//toFixed 2deci
+                    </Text> // toFixed 2deci
                 ))}
             </ScrollView>
 
-            <Button
-                title="Borrar Todo"
-                onPress={borrarNotas}
-                color="#d32f2f" 
-            />
-            <Button
-                title="Volver al Login"
-                onPress={irLogin}
-                color="#08ad10" 
-
-            />
+            <View style={styles.filaBotones}>
+                <View style={styles.botonEspaciado}>
+                    <Button
+                        title="Borrar Todo"
+                        onPress={borrarNotas}
+                        color="#d32f2f" 
+                    />
+                </View>
+                <View style={styles.botonEspaciado}>
+                    <Button
+                        title="Volver" 
+                        onPress={irLogin}
+                        color="#08ad10" 
+                    />
+                </View>
+            </View>
         </View>
     );
 }
@@ -144,5 +149,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#eee',
         color: '#555',
+    },
+    filaBotones: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    botonEspaciado: {
+        flex: 1,
+        marginHorizontal: 5,
     }
 });
